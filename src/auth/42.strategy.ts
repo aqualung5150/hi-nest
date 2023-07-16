@@ -28,7 +28,7 @@ export class FortyTwoStrategy extends PassportStrategy(Strategy, '42') {
         });
         try {
             const { data } = await lastValueFrom(req);
-            console.log(data.email);
+            console.log('login:', data.login);
             return data;
         } catch (error) {}
 
