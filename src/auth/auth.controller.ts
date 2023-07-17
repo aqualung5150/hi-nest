@@ -13,6 +13,7 @@ export class AuthController {
     @Get('callback')
     @UseGuards(FortyTwoAuthGuard)
     async getCallback(@Req() req, @Res() res) {
+        console.log(req.user.id, req.user.login);
         return res.redirect('/');
     }
 }

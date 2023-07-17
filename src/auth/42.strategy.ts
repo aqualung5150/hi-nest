@@ -28,7 +28,9 @@ export class FortyTwoStrategy extends PassportStrategy(Strategy, '42') {
         });
         try {
             const { data } = await lastValueFrom(req);
-            console.log('login:', data.login);
+            // console.log('login:', data.login);
+
+            // return된 data는 callbackURL의 request객체(req.user)에 담김
             return data;
         } catch (error) {}
 
