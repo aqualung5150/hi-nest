@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -8,15 +9,15 @@ export class UsersService {
         return await this.users.find(user => user.id === userId);
     }
 
-    async newUser(user: any) {
-        const found = await this.findUserById(parseInt(user.id));
+    async newUser(user: User) {
+        const found = await this.findUserById(user.id);
         if(!found) {
             console.log('New User Added');
             this.users.push(user);
         }
     }
 
-    async getUserIfRefreshTokenMatches(refreshToken: string, userId: number): Promise<any>
+    async getUserIfRefreshTokenMatches(refreshToken: string, userId: number): Promise<User | null>
     {
         const user = await this.findUserById(userId);
 

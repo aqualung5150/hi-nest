@@ -37,7 +37,7 @@ export class FortyTwoStrategy extends PassportStrategy(Strategy, '42') {
             const { data } = await lastValueFrom(req);
 
             //JWT gen
-            const user = { id: data.id, username: data.login};
+            const user = { id: data.id, username: data.login };
             const access_token = await this.authService.generateAccessToken(user);
             const refresh_token = await this.authService.generateRefreshToken(user);
 

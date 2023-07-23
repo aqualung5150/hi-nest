@@ -41,6 +41,7 @@ export class AuthController {
     }
 
     @UseGuards(JwtRefreshGuard)
+    //@Post('refresh')
     @Get('refresh')
     async refresh(@Req() req: any, @Res() res: Response) {
         const user = req.user;
@@ -67,6 +68,7 @@ export class AuthController {
     }
 
     //todo - JwtGuard 실패 시 /auth/login 페이지로 리다이렉트 (UseFilter??)
+    // 위 처럼 처리하는 것이 바람직하지 않을 수 있음
     @UseGuards(JwtGuard)
     @Get('test')
     getTest(@Req() req) {

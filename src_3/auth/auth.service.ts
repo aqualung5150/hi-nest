@@ -11,19 +11,19 @@ export class AuthService {
         private usersService: UsersService
     ) {}
 
-    async generateAccessToken(user): Promise<string> {
+    async generateAccessToken(user: any): Promise<string> {
         const payload = {
             id: user.id,
             username: user.username,
         }
-        return this.jwtService.signAsync(payload);
+        return await this.jwtService.signAsync(payload);
     }
 
-    async generateRefreshToken(user): Promise<string> {
+    async generateRefreshToken(user: any): Promise<string> {
         const payload = {
             id: user.id
         }
-        return this.jwtService.signAsync({id: payload.id}, {
+        return await this.jwtService.signAsync({id: payload.id}, {
         // secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
         // expiresIn: this.configService.get<string>('JWT_REFRESH_EXPIRATION_TIME'),
             secret: '2582',
@@ -38,7 +38,7 @@ export class AuthService {
         // Verify refresh token
         // JWT Refresh Token 검증 로직
         // const decodedRefreshToken = this.jwtService.verify(refresh_token, { secret: process.env.JWT_REFRESH_SECRET });
-        const decodedRefreshToken = this.jwtService.verify(refresh_token, { secret: '2582' });
+        const decodedRefreshToken = await this.jwtService.verifyAsync(refresh_token, { secret: '2582' });
     
         // Check if user exists
         const userId = decodedRefreshToken.id;
